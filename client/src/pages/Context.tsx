@@ -1,5 +1,5 @@
 import Axios from 'axios';
-import React, { createContext, PropsWithChildren, useEffect, useState } from 'react';
+import { createContext, PropsWithChildren, useEffect, useState } from 'react';
 
 export const myContext = createContext<any>({})
 

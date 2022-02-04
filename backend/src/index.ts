@@ -119,6 +119,24 @@ app.get("/logout", (req, res) => {
 
 })
 
+app.post("/deleteuser/:_id", async(req, res)=> {
+ 
+
+  const {_id} = req.params
+  await User.findByIdAndDelete(_id.toString()).then(()=> {res.send("success")})
+ 
+})
+
+app.get("/getallusers", async (req, res) => {
+  try {
+    const data =await User.find()
+    res.send(data)
+  }catch(err) {
+    res.send(err)
+  }
+
+})
+
 app.listen(4000, () => {
   console.log("Server Started");
 });

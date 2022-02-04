@@ -1,9 +1,34 @@
-import React from "react";
+import React, { useState } from 'react'
+import axios, { AxiosResponse } from 'axios';
 
-const Register = () => {
-  return <div>
-      <h1>This is Register page</h1>
-  </div>;
-};
+export default function Register() {
+  const [username, setUsername] = useState<string>("")
+  const [password, setPassword] = useState<string>("")
 
-export default Register;
+
+  const register = () => {
+    axios.post("http://localhost:4000/register", {
+      username,
+      password
+    }, {
+      withCredentials: true
+    }).then((res: AxiosResponse) => {
+      if (res.data === "success") {
+        window.location.href = "/login"
+      }
+    }, () => {
+      console.log("Failure");
+      
+    })
+  }
+
+  return (
+    <div>
+      <h1>Register</h1>
+      <input type="text" placeholder='username' onChange={e => setUsername(e.target.value)} />
+      <input type="password" placeholder='password' onChange={e => setPassword(e.target.value)} />
+      <button onClick={register}>Register</button>
+
+    </div>
+  )
+}
